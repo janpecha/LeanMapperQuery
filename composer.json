@@ -19,7 +19,7 @@
 	},
 	"require": {
 		"php": "^7.1 || ^8.0",
-		"tharos/leanmapper": ">=3.0"
+		"tharos/leanmapper": "^4.0@dev"
 	},
 	"require-dev": {
 		"nette/tester": "~2.3.4",

@@ -123,7 +123,7 @@ class Entity extends LeanMapper\Entity
 		return $entities;
 	}
 
-	public function __call($name, array $arguments)
+	public function __call(string $name, array $arguments)
 	{
 		if (preg_match('#^('.implode('|', static::$magicMethodsPrefixes).')(.+)$#', $name, $matches)) {
 			if (count($arguments) !== 1) {
