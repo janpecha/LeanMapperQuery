@@ -14,12 +14,20 @@ if (@!include __DIR__ . '/../vendor/autoload.php') {
 Tester\Environment::setup();
 date_default_timezone_set('Europe/Prague');
 
+class TestMapper extends DefaultMapper
+{
+	public function __construct()
+	{
+		$this->defaultEntityNamespace = null;
+	}
+}
+
 $connection = new Connection([
 				'driver' => 'sqlite3',
 				'database' => __DIR__ . '/db/library.sq3',
 ]);
 
-$mapper = new LeanMapper\DefaultMapper(null);
+$mapper = new TestMapper;
 $entityFactory = new DefaultEntityFactory;
 
 function getFluent($table) {

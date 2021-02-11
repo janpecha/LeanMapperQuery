@@ -10,9 +10,9 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-class Test2Mapper extends LeanMapper\DefaultMapper
+class Test2Mapper extends TestMapper
 {
-	public function getPrimaryKey(string $table): string
+	public function getPrimaryKey($table): string
 	{
 		if ($table === 'author') {
 			return 'id_author';
@@ -20,12 +20,12 @@ class Test2Mapper extends LeanMapper\DefaultMapper
 		return 'id';
 	}
 
-	public function getRelationshipColumn(string $sourceTable, string $targetTable, ?string $relationshipName = null): string
+	public function getRelationshipColumn($sourceTable, $targetTable, ?string $relationshipName = NULL): string
 	{
 		return $targetTable . '_id';
 	}
 }
-$mapper = new Test2Mapper(null);
+$mapper = new Test2Mapper;
 
 /**
  * @property int    $id

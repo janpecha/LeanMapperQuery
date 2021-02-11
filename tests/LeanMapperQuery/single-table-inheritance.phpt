@@ -34,9 +34,9 @@ class BaseRepository extends Repository
 	}
 }
 
-class ClientMapper extends LeanMapper\DefaultMapper implements LeanMapperQuery\ICaster
+class ClientMapper extends TestMapper implements LeanMapperQuery\ICaster
 {
-	public function getEntityClass(string $table, LeanMapper\Row $row = null): string
+	public function getEntityClass($table, LeanMapper\Row $row = null): string
 	{
 		if ($table === 'client') {
 			if (isset($row->type)) {
@@ -48,7 +48,7 @@ class ClientMapper extends LeanMapper\DefaultMapper implements LeanMapperQuery\I
 		return parent::getEntityClass($table, $row);
 	}
 
-	public function getTable(string $entity): string
+	public function getTable($entity): string
 	{
 		if ($entity === 'ClientIndividual' || $entity === 'ClientCompany') {
 			return 'client';
@@ -130,7 +130,7 @@ $connection = new LeanMapper\Connection([
 $connection->onEvent[] = function ($event) use (&$sqls) {
 	$sqls[] = $event->sql;
 };
-$mapper = new ClientMapper(null);
+$mapper = new ClientMapper;
 $clientRepository = new ClientRepository($connection, $mapper, $entityFactory);
 $tagRepository = new TagRepository($connection, $mapper, $entityFactory);
 

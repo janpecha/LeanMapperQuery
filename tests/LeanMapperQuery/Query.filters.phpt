@@ -16,9 +16,9 @@ require_once __DIR__ . '/../bootstrap.php';
 
 const FILTER = '1 = 1';
 
-class FilterMapper extends LeanMapper\DefaultMapper
+class FilterMapper extends TestMapper
 {
-	public function getImplicitFilters(string $entityClass, Caller $caller = null)
+	public function getImplicitFilters($entityClass, Caller $caller = null)
 	{
 		return new ImplicitFilters(function (Fluent $statement) use ($entityClass) {
 			$entityClass === 'Book' && $statement->join('test')->on('[book].[id] = [test].[book_id]');
@@ -62,7 +62,7 @@ class BookRepository extends Repository
 
 ////////////////
 
-$mapper = new FilterMapper(null);
+$mapper = new FilterMapper;
 $bookRepository = new BookRepository($connection, $mapper, $entityFactory);
 
 $fluent = $bookRepository->createFluent();
